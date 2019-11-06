@@ -55,6 +55,25 @@
     </table>
     <script>
     // Enter code here
+    const model = new brain.NeuralNetwork({
+      hiddenLayers: [3],
+    });
+    model.train([
+      { input: [0,0,0], output: [0] },
+      { input: [0,0,1], output: [0] },
+      { input: [0,1,1], output: [0] },
+      { input: [1,0,1], output: [1] },
+      { input: [1,1,1], output: [1] },
+    ]);
+
+    $('#x1, #x2, #x3').change(() => {
+      const x1 = parseInt($('#x1').val());
+      const x2 = parseInt($('#x2').val());
+      const x3 = parseInt($('#x3').val());
+      const y = model.run([x1, x2, x3]);
+      const roundedY = Math.round(y[0]);
+      $('#y').val(roundedY);
+    });
 
 
     </script>
